@@ -1,0 +1,45 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "40d46916eb4df98833165de70b2f8f25"
+name = "my-app-ruby"
+handle = "my-app-ruby"
+application_url = "https://vatican-recover-takes-cells.trycloudflare.com"
+embedded = true
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "aki-20240915.myshopify.com"
+include_config_on_deploy = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products"
+
+[auth]
+redirect_urls = [
+  "https://vatican-recover-takes-cells.trycloudflare.com/auth/callback",
+  "https://vatican-recover-takes-cells.trycloudflare.com/auth/shopify/callback",
+  "https://vatican-recover-takes-cells.trycloudflare.com/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-07"
+
+  [[webhooks.subscriptions]]
+  uri = "/api/webhooks/customers_data_request"
+  compliance_topics = [ "customers/data_request" ]
+
+  [[webhooks.subscriptions]]
+  uri = "/api/webhooks/customers_redact"
+  compliance_topics = [ "customers/redact" ]
+
+  [[webhooks.subscriptions]]
+  uri = "/api/webhooks/shop_redact"
+  compliance_topics = [ "shop/redact" ]
+
+  [[webhooks.subscriptions]]
+  topics = [ "app/uninstalled" ]
+  uri = "/api/webhooks/app_uninstalled"
+
+[pos]
+embedded = false
